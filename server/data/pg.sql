@@ -2,14 +2,14 @@ drop schema if exists quiz cascade;
 create schema quiz;
 set search_path to quiz;
 
-create table "user"
+create table utilisateur
 (
-    user_id serial primary key,
-    user_name varchar,
-    user_password varchar
+    util_id serial primary key,
+    util_name varchar,
+    util_password varchar
 );
 
-insert into "user"(user_name,user_password) values('John','John'),('Rosy','Rosy'),('Pierre','Pierre');
+insert into utilisateur(util_name,util_password) values('John','John'),('Rosy','Rosy'),('Pierre','Pierre');
 
 
 create table quiz
@@ -18,7 +18,7 @@ create table quiz
     quiz_name varchar,
     quiz_image varchar,
     quiz_keyword varchar,
-    user_id int references "user"(user_id)
+    user_id int references utilisateur(util_id)
 
 );
 
