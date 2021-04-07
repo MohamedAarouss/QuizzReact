@@ -22,7 +22,7 @@ create table quiz
 
 );
 
-insert into quiz(quiz_name) values('quiz 1'),('quiz 2');
+insert into quiz(quiz_name,quiz_image) values('quiz 1','http://localhost:8000/img/ul6rv.jpg'),('quiz 2','http://localhost:8000/img/25595.jpg');
 
 create table question
 (

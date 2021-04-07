@@ -12,6 +12,7 @@
 # production
 /build
 .idea
+/server/data/pg.js
 
 # misc
 .DS_Store
