@@ -49,8 +49,9 @@ function Quiz() {
                         </td>
                         <td>10</td>
                         <td>
+                            <Link className="btn btn-success" to={`${q.quiz_id}/questions`}>Jouer</Link>
                             <Link className="btn btn-warning" to={`/quiz/${q.quiz_id}/edit`}>Modifier</Link>
-                            <a class="btn btn-danger" href={`http://localhost:8000/delete_quiz/${q.quiz_id}`}>Supprimer</a>
+                            <Link className="btn btn-danger" to={`/quiz/${q.quiz_id}/delete`}>Supprimer</Link>
                         </td>
                     </tr>
                 )}
