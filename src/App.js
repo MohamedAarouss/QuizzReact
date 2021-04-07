@@ -1,9 +1,10 @@
 import './App.css';
 import Quiz from "./Quiz";
-import QuizForm from "./Form/QuizForm";
 import {Link, Router} from "@reach/router";
 import 'bootstrap/dist/css/bootstrap.css';
 import Question from "./Questions";
+import QuizForm from "./Form/QuizForm";
+import React from "react";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Router>
               <Quiz path="quiz"/>
               <Question path="quiz/:quiz_id"/>
+              <QuizForm path="/quiz/new"/>
           </Router>
       </div>
   );

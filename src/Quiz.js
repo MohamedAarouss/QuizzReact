@@ -58,9 +58,9 @@ function Quiz() {
             </table>
 
             <Link className="btn btn-success" to="/quiz/new">Créer un quiz</Link>
-            <Router>
-                <QuizForm path="/quiz/new"/>
-            </Router>
+            {/*<Router>*/}
+            {/*    <QuizForm path="/quiz/new"/>*/}
+            {/*</Router>*/}
 
         </>
     );

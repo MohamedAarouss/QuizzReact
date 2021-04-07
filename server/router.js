@@ -37,8 +37,23 @@ router
     // SHOW ONE QUIZ
     .get('/quiz/:id',
         async (req, res) => {
+            const question = await db.query('select * from quiz where quiz_id =$1',[req.params.id]);
+            console.log(question.rows);
+            res.json(question.rows);
+        })
+
+
+    .get('/quiz/:id/questions',
+        async (req, res) => {
             const question = await db.query('select * from question where quiz_id =$1',[req.params.id]);
-            console.log( question.rows);
+            console.log(question.rows);
+            res.json(question.rows);
+        })
+
+    .get('/quiz/:ques_id/propositions',
+        async (req, res) => {
+            const question = await db.query('select * from proposition where ques_id =$1',[req.params.ques_id]);
+            console.log(question.rows);
             res.json(question.rows);
         })
 
