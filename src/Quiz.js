@@ -18,9 +18,9 @@ function Quiz() {
         getQuiz()
     }, []);
 
-    if (quiz.length === 0)
+    if(quiz.length === 0 )
         return (
-            <p>Pas de Quiz</p>
+            <p>Loading</p>
         )
 
     // function showQuestions(quiz_id){
@@ -43,7 +43,7 @@ function Quiz() {
                 {quiz.map(q =>
                     <tr>
                         <td>{q.quiz_id}</td>
-                        <td>{q.quiz_name}</td>
+                        <td><Link to={`${q.quiz_id}`}>{q.quiz_name}</Link></td>
                         <td>
                             <img src={q.quiz_image} alt="Pas d'image"/>
                         </td>
@@ -57,7 +57,7 @@ function Quiz() {
                 </tbody>
             </table>
 
-            <Link class="btn btn-success" to="/quiz/new">Créer un quiz</Link>
+            <Link className="btn btn-success" to="/quiz/new">Créer un quiz</Link>
             <Router>
                 <QuizForm path="/quiz/new"/>
             </Router>

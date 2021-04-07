@@ -6,7 +6,6 @@ const {redirectTo} = require("@reach/router");
 
 module.exports = router;
 
-
 router
     .get("/", (req, res) => {
         res.json("Bienvenue sur le projet WEKA 2021 du groupe Les Crackheads De Lens !");
@@ -38,19 +37,9 @@ router
     // SHOW ONE QUIZ
     .get('/quiz/:id',
         async (req, res) => {
-            const result = await db.query('select * from quiz where quiz_id =$1', [req.params.id]);
-            const question = await db.query('select ques_id from question where quiz_id =$1',[req.params.id]);
-            console.log([result.rows, question.rows]);
-            res.json([result.rows, question.rows]);
-        })
-
-    //SHOW QUESTIONS QUIZ
-    .get('/quiz/:id/:ques_id',
-        async (req, res) => {
-            const result = await db.query('select * from question where quiz_id =$1 and ques_id=$2', [req.params.id, req.params.ques_id]);
-            const proposition = await db.query('select * from proposition where ques_id =$1', [req.params.ques_id]);
-            console.log([result.rows, proposition.rows]);
-            res.json([result.rows, proposition.rows]);
+            const question = await db.query('select * from question where quiz_id =$1',[req.params.id]);
+            console.log( question.rows);
+            res.json(question.rows);
         })
 
     // DELETE ONE QUIZ
