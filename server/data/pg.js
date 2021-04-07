@@ -3,7 +3,7 @@ const pool = new Pool({
     user: 'cleveland',
     host: 'localhost',
     database: 'quiz',
-    password: 'Password123',
+    password: 'Password123$',
     port: 5432
 });
 
