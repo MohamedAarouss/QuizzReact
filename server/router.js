@@ -41,8 +41,13 @@ router
     .get('/delete_quiz/:quiz_id',
         async (req, res) => {
             try {
+                const questions = await db.query('select * from question where question.quiz_id =$1', [req.params.quiz_id]);
+                for (const q of questions.rows) {
+                    await db.query('DELETE FROM proposition where proposition.ques_id = $1', [q.ques_id]);
+                }
+                await db.query('DELETE FROM question where question.quiz_id = $1', [req.params.quiz_id]);
                 await db.query('DELETE FROM quiz WHERE quiz_id = $1', [req.params.quiz_id]);
-                console.log('delete');
+
                 return res.redirect('http://localhost:3000/quiz');
             } catch (err) {
                 console.error(err);
@@ -55,7 +60,7 @@ router
         async (req, res) => {
             try {
                 const result = await db.query('select * from quiz');
-                console.log(result.rows);
+                // console.log(result.rows);
                 res.json(result.rows);
             } catch (err) {
                 console.error(err);
@@ -90,7 +95,7 @@ router
         })
     .get('/quiz/:ques_id/propositions',
         async (req, res) => {
-            const question = await db.query('select * from proposition where ques_id =$1',[req.params.ques_id]);
+            const question = await db.query('select * from proposition where ques_id =$1', [req.params.ques_id]);
             console.log(question.rows);
             res.json(question.rows);
         })

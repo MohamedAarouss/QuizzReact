@@ -45,7 +45,7 @@ function Questions(props) {
 
     if(questions.length === 0)
         return (
-            <p>Loading</p>
+            <p>Pas de questions</p>
         )
 
     let q = document.getElementById("questions");
