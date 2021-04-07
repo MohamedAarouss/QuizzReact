@@ -24,7 +24,7 @@ function Quiz() {
         <>
         <div className="Quiz">
             <p>
-                {quiz.map(q => <li>{q.quiz_name}</li>)}
+                {quiz.map(q => <li>{q.quiz_name} <img src={q.quiz_image} alt="Pas d'image"/></li>)}
             </p>
         </div>
         </>
