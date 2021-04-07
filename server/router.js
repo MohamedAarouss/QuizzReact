@@ -31,9 +31,9 @@ router
 router
     .post("/token", async (req, res) => {
         try {
-            console.log("test "+ req.body);
-            const result = await db.query('select util_id, util_password from utilisateur where util_name=$1', [req.body.name]);
-            const match = await bcrypt.compare(req.body.password, result.rows[0].util_password);
+            console.log("test ", req.body);
+            const result = await db.query('select util_id, util_password from utilisateur where util_name=$1', [req.body.util_name]);
+            const match = await bcrypt.compare(req.body.util_password, result.rows[0].util_password);
             if (match) {
                 const token = jwt.sign({id: result.rows[0].util_id,}, cfg.jwtSecret, {expiresIn: '1h'});
                 return res.json({token: token});
