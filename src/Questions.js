@@ -25,7 +25,7 @@ function Questions(props) {
     useEffect(() => {
         const getQuestions = async () => {
             const quiz_id = props.quiz_id;
-            const data = (await axios.get('http://localhost:8000/quiz/'+quiz_id)).data;
+            const data = (await axios.get('http://localhost:8000/quiz/'+quiz_id+'/questions')).data;
             console.log(data);
             setQuestions(data);
         }

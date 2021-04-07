@@ -45,12 +45,12 @@ function Quiz() {
                         <td>{q.quiz_id}</td>
                         <td><Link className="btn btn-primary" to={`${q.quiz_id}`}>{q.quiz_name}</Link></td>
                         <td>
-                            <img src={q.quiz_image} alt="Pas d'image"/>
+                            <img class="image" src={q.quiz_image} alt="Pas d'image"/>
                         </td>
                         <td>10</td>
                         <td>
                             <Link className="btn btn-warning" to={`/quiz/${q.quiz_id}/edit`}>Modifier</Link>
-                            <Link className="btn btn-danger" to={`/quiz/${q.quiz_id}/delete`}>Supprimer</Link>
+                            <a class="btn btn-danger" href={`http://localhost:8000/delete_quiz/${q.quiz_id}`}>Supprimer</a>
                         </td>
                     </tr>
                 )}
@@ -58,9 +58,6 @@ function Quiz() {
             </table>
 
             <Link className="btn btn-success" to="/quiz/new">Créer un quiz</Link>
-            <Router>
-                <QuizForm path="/quiz/new"/>
-            </Router>
 
         </>
     );

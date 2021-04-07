@@ -15,7 +15,7 @@ router
 // ---------------------------------- QUIZ ----------------------------------
 router
 
-    // POST NEW QUIZZ
+    // NEW QUIZ
     .get("/new_quiz/:quiz_name", async (req, res) => {
         try {
             await db.query("insert into quiz(quiz_name) values($1)", [req.params.quiz_name]);
@@ -26,29 +26,63 @@ router
         }
     })
 
+    // EDIT QUIZ
+    .get("/edit_quiz/:quiz_id/:quiz_name", async (req, res) => {
+        try {
+            await db.query("UPDATE quiz SET quiz_name = $2 WHERE quiz_id = $1", [req.params.quiz_id, req.params.quiz_name]);
+            return res.redirect('http://localhost:3000/quiz');
+        } catch (err) {
+            console.error(err);
+            res.sendStatus(500);
+        }
+    })
+
+    // DELETE QUIZ
+    .get('/delete_quiz/:quiz_id',
+        async (req, res) => {
+            try {
+                await db.query('DELETE FROM quiz WHERE quiz_id = $1', [req.params.quiz_id]);
+                console.log('delete');
+                return res.redirect('http://localhost:3000/quiz');
+            } catch (err) {
+                console.error(err);
+                res.sendStatus(500);
+            }
+        })
+
     // LIST ALL QUIZ
     .get('/quiz',
         async (req, res) => {
-            const result = await db.query('select * from quiz');
-            console.log(result.rows);
-            res.json(result.rows);
+            try {
+                const result = await db.query('select * from quiz');
+                console.log(result.rows);
+                res.json(result.rows);
+            } catch (err) {
+                console.error(err);
+                res.sendStatus(500);
+            }
         })
 
     // SHOW ONE QUIZ
     .get('/quiz/:id',
         async (req, res) => {
-            const question = await db.query('select * from question where quiz_id =$1',[req.params.id]);
-            console.log( question.rows);
-            res.json(question.rows);
+            try {
+                const result = await db.query('select * from quiz where quiz_id =$1', [req.params.id]);
+                console.log(result.rows);
+                res.json(result.rows);
+            } catch (err) {
+                console.error(err);
+                res.sendStatus(500);
+            }
         })
 
-    // DELETE ONE QUIZ
-    .get('/delete_quiz/:id',
+    // GET ALL QUESTIONS FROM ONE QUIZ
+    .get('/quiz/:id/questions',
         async (req, res) => {
             try {
-                await db.query('DELETE FROM quiz WHERE quiz_id = $1', [req.params.id]);
-                console.log('delete');
-                redirectTo('/');
+                const question = await db.query('select * from question where quiz_id =$1', [req.params.id]);
+                console.log(question.rows);
+                res.json(question.rows);
             } catch (err) {
                 console.error(err);
                 res.sendStatus(500);
