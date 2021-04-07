@@ -7,16 +7,23 @@ import QuizForm from "./Form/QuizForm";
 
 function Quiz() {
 
+    const [search, setSearch] = useState("");
     const [quiz, setQuiz] = useState([]);
 
+    let handleSearch = e => {
+        setSearch(e.target.value);
+    }
+
     useEffect(() => {
-        const getQuiz = async () => {
-            const data = (await axios.get('http://localhost:8000/quiz')).data;
-            console.log(data);
-            setQuiz(data);
-        }
-        getQuiz()
-    }, []);
+        const research = quiz.filter(q => String(q.quiz_keyword) === String(search));
+        research.length === 0 ? getQuiz() : setQuiz(research);
+    }, [search]);
+
+    async function getQuiz() {
+        const data = (await axios.get('http://localhost:8000/quiz')).data;
+        console.log(data);
+        setQuiz(data);
+    }
 
     if(quiz.length === 0 )
         return (
@@ -29,6 +36,9 @@ function Quiz() {
 
     return (
         <>
+            <label>Recherche : </label>
+            <input id="search" value={search} onChange={handleSearch} type="text"/>
+
             <table className="table">
                 <thead>
                 <tr>
