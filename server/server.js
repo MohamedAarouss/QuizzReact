@@ -11,6 +11,7 @@ const port = process.env.PORT || 8000;
 app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/img', express.static('img'));
 app.use(bodyParser.urlencoded({
     extended: true
 }));

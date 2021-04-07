@@ -3,6 +3,8 @@ import Quiz from "./Quiz";
 import QuizForm from "./Form/QuizForm";
 import {Link, Router} from "@reach/router";
 import 'bootstrap/dist/css/bootstrap.css';
+import Question from "./Questions";
+
 
 function App() {
   return (
@@ -12,13 +14,14 @@ function App() {
 
               <div className="collapse navbar-collapse" id="navbarNavDropdown">
                   <ul className="navbar-nav">
-                      <Link class="btn btn-info" to="/quiz">Liste des Quiz</Link>
+                      <Link className="btn btn-info" to="quiz">Liste des Quiz</Link>
                       <button type="button" className="btn btn-secondary">Connexion</button>
                   </ul>
               </div>
           </nav>
           <Router>
-              <Quiz path="/quiz"/>
+              <Quiz path="quiz"/>
+              <Question path="quiz/:quiz_id"/>
           </Router>
       </div>
   );
