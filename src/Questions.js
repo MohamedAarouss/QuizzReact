@@ -15,6 +15,7 @@ function Question(props) {
                     <tr>
                         <td>
                             {p.prop_phrase}
+                            <img className="image" src={p.prop_image} alt=""/>
                         </td>
                     </tr>
                 )}

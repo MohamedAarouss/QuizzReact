@@ -22,7 +22,7 @@ create table quiz
 
 );
 
-insert into quiz(quiz_name,quiz_image) values('quiz 1','http://localhost:8000/img/ul6rv.jpg'),('quiz 2','http://localhost:8000/img/25595.jpg');
+insert into quiz(quiz_name,quiz_image,quiz_keyword) values('quiz 1','http://localhost:8000/img/ul6rv.jpg','good'),('quiz 2','http://localhost:8000/img/25595.jpg','bad');
 
 create table question
 (
@@ -33,7 +33,7 @@ create table question
 
 );
 
-insert into question(ques_phrase,ques_points,quiz_id) values('Qui est le plus beau ?',10,1),('Quel est le meilleur plat ?',5,1),('Qui est le meilleur patron ?',5,1),('Qui est le plus moche ?',10,2),('Quel est le pire plat ?',5,2),('Qui est le meilleur prof ?',5,2);
+insert into question(ques_phrase,ques_points,quiz_id) values('Qui est le plus beau ?',10,1),('Quel est le meilleur plat ?',5,1),('Qui est le meilleur patron ?',5,1),('Qui est le plus moche ?',10,2),('Quel est le pire plat ?',5,2),('Qui est le meilleur prof ?',5,2),('Quelle image est la moins drôle ?',10,2),('Est-ce une question inutile ?',1,2);
 
 create table proposition
 (
@@ -45,7 +45,7 @@ create table proposition
 
 );
 
-insert into proposition(prop_phrase,prop_valide,ques_id) values('Momo',true,1),('Cleveland',true,1),('Leo',true,1),('Lasagnes',true,2),('Frites',false,2),('Jeff Bezos',false,3),('Momo',true,3),('Jul',false,3),('Steve Jobs',true,3),('Momo',false,4),('Cleveland',false,4),('Leo',false,4),('Asticot',true,5),('Ver',true,5),('Condota',false,6),('OR',false,6),('JM-Lagniez',true,6);
+insert into proposition(prop_phrase,prop_image,prop_valide,ques_id) values('Momo','',true,1),('Cleveland','',true,1),('Leo','',true,1),('Lasagnes','',true,2),('Frites','',false,2),('Jeff Bezos','',false,3),('Momo','',true,3),('Jul','',false,3),('Steve Jobs','',true,3),('Momo','',false,4),('Cleveland','',false,4),('Leo','',false,4),('Asticot','',true,5),('Ver','',true,5),('Condota','',false,6),('OR','',false,6),('JM-Lagniez','',true,6),('','http://localhost:8000/img/25595.jpg',true,7),('','http://localhost:8000/img/ul6rv.jpg',false,7),('Oui','',true,8),('Non','',false,8);
 
 select * from quiz;
 
