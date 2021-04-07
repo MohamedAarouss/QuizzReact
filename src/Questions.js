@@ -16,9 +16,6 @@ function Question(props) {
                         <td>
                             {p.prop_phrase}
                         </td>
-                        <td>
-
-                        </td>
                     </tr>
                 )}
             </div>
@@ -42,7 +39,6 @@ function Questions(props) {
         getQuestions()
     }, []);
 
-
     if(questions.length === 0)
         return (
             <p>Pas de questions</p>
@@ -52,6 +48,7 @@ function Questions(props) {
     let score = 0;
 
     const currentQuestion = questions[currIndex];
+    const jsxQuestion = <Question question={currentQuestion.ques_phrase} points={currentQuestion.ques_points} propositions={propositions}/>;
 
     async function getPropositions() {
         let p = [];
@@ -66,11 +63,14 @@ function Questions(props) {
         }
     }
 
-    const jsxQuestion = <Question question={currentQuestion.ques_phrase} points={currentQuestion.ques_points} propositions={propositions}/>;
+    if(propositions.length===0){
+        getPropositions();
+    }
 
     function handleClick() {
         if (currIndex + 1 < questions.length){
             setCurrIndex(currIndex + 1);
+            getPropositions();
         }
         else q.innerHTML = "<h3 style='color: #ff0000'>Il n'y a plus de questions !</h3><br>" +
             "<h4>Votre score est de : </h4>"+score;

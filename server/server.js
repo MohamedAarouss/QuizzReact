@@ -12,6 +12,7 @@ app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/img', express.static('img'));
+app.use('/video',express.static('video'));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
