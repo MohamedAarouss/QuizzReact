@@ -43,12 +43,13 @@ function Quiz() {
                 {quiz.map(q =>
                     <tr>
                         <td>{q.quiz_id}</td>
-                        <td><Link to={`${q.quiz_id}`}>{q.quiz_name}</Link></td>
+                        <td>{q.quiz_name}</td>
                         <td>
                             <img src={q.quiz_image} alt="Pas d'image"/>
                         </td>
                         <td>10</td>
                         <td>
+                            <Link className="btn btn-success" to={`${q.quiz_id}/questions`}>Jouer</Link>
                             <Link className="btn btn-warning" to={`/quiz/${q.quiz_id}/edit`}>Modifier</Link>
                             <Link className="btn btn-danger" to={`/quiz/${q.quiz_id}/delete`}>Supprimer</Link>
                         </td>

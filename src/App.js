@@ -22,7 +22,7 @@ function App() {
           </nav>
           <Router>
               <Quiz path="quiz"/>
-              <Question path="quiz/:quiz_id"/>
+              <Question path="quiz/:quiz_id/questions"/>
               <QuizForm path="/quiz/new"/>
           </Router>
       </div>
