@@ -1,11 +1,11 @@
 import './App.css';
+import React from "react";
+import {Link, Router} from "@reach/router";
+import 'bootstrap/dist/css/bootstrap.css';
 import Quiz from "./Quiz";
 import QuizForm from "./Form/QuizForm";
 import QuizEditForm from "./Form/QuizEditForm";
-import {Link, Router} from "@reach/router";
-import 'bootstrap/dist/css/bootstrap.css';
 import Question from "./Questions";
-import React from "react";
 
 
 function App() {

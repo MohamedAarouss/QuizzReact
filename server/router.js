@@ -88,6 +88,12 @@ router
                 res.sendStatus(500);
             }
         })
+    .get('/quiz/:ques_id/propositions',
+        async (req, res) => {
+            const question = await db.query('select * from proposition where ques_id =$1',[req.params.ques_id]);
+            console.log(question.rows);
+            res.json(question.rows);
+        })
 ;
 
 router
