@@ -50,7 +50,7 @@ function Questions(props) {
 
     let q = document.getElementById("questions");
 
-    console.log('avant question : '+currIndex)
+    //console.log('avant question : '+currIndex)
     const currentQuestion = questions[currIndex]; // A voir si bien appelé
     const jsxQuestion = <Question question={currentQuestion.ques_phrase} points={currentQuestion.ques_points} propositions={propositions}/>;
 
@@ -61,12 +61,12 @@ function Questions(props) {
         //console.log(ques_id)
         //try{ // execute 2 fois ?
             console.log('avant')
-        if(!initial){
+        // if(!initial){
             await axios.get('http://localhost:8000/quiz/'+ques_id+'/propositions')
             .then(response => {
                 p=response.data;
                 setPropositions(p);
-                setCurrIndex(currIndex+1)
+                //setCurrIndex(currIndex+1)
                 console.log('result')})
             .catch(error => {
                 console.log(error.response)
@@ -74,18 +74,18 @@ function Questions(props) {
             console.log(p);
             // setPropositions(p);
             console.log('apres')
-        }else{
-            await axios.get('http://localhost:8000/quiz/1/propositions')
-                .then(response => {
-                    p=response.data;
-                    setPropositions(p);
-                    //setCurrIndex(currIndex+1)
-                    console.log('result')})
-                .catch(error => {
-                    console.log(error.response)
-                })
-            setInitial(false)
-        }
+        // }else{
+        //     await axios.get('http://localhost:8000/quiz/1/propositions')
+        //         .then(response => {
+        //             p=response.data;
+        //             setPropositions(p);
+        //             //setCurrIndex(currIndex+1)
+        //             console.log('result')})
+        //         .catch(error => {
+        //             console.log(error.response)
+        //         })
+        //     setInitial(false)
+        // }
 
             //
             // console.log(currIndex)
@@ -94,19 +94,18 @@ function Questions(props) {
         //}
     }
 
-    if(propositions.length===0 && initial){
-        console.log('initial')
+    if(propositions.length===0){
         getPropositions();
         // let p = [{"prop_id":1,"prop_phrase":"Toto","prop_image":"","prop_valide":true,"ques_id":1},{"prop_id":2,"prop_phrase":"Cleveland","prop_image":"","prop_valide":true,"ques_id":1},{"prop_id":3,"prop_phrase":"Leo","prop_image":"","prop_valide":true,"ques_id":1}]
         // setPropositions(p)
         //setCurrIndex(currIndex+1)
         //console.log(currIndex)
-        setInitial(false)
+        //setInitial(false)
     }
 
     function handleClick() {
-        if (currentQuestion.ques_id < questions.length){
-            // setCurrIndex(currIndex + 1);
+        if (currIndex + 1 < questions.length){
+            setCurrIndex(currIndex + 1);
             getPropositions();
         }
         else q.innerHTML = "<h3 style='color: #ff0000'>Il n'y a plus de questions !</h3><br>" +
