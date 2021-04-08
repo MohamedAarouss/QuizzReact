@@ -77,10 +77,9 @@ router
 router
 
     // NEW QUIZ
-    .get("/new_quiz/:quiz_name", async (req, res) => {
+    .get("/new_quiz/:quiz_name/:quiz_keyword", async (req, res) => {
         try {
-            await db.query("insert into quiz(quiz_name) values($1)", [req.params.quiz_name]);
-            return res.redirect('http://localhost:3000/quiz');
+            await db.query("insert into quiz(quiz_name, quiz_keyword) values($1,$2)", [req.params.quiz_name, req.params.quiz_keyword]);
         } catch (err) {
             console.error(err);
             res.sendStatus(500);
@@ -88,9 +87,9 @@ router
     })
 
     // EDIT QUIZ
-    .get("/edit_quiz/:quiz_id/:quiz_name", async (req, res) => {
+    .get("/edit_quiz/:quiz_id/:quiz_name/:quiz_keyword", async (req, res) => {
         try {
-            await db.query("UPDATE quiz SET quiz_name = $2 WHERE quiz_id = $1", [req.params.quiz_id, req.params.quiz_name]);
+            await db.query("UPDATE quiz SET quiz_name = $2, quiz_keyword = $3 WHERE quiz_id = $1", [req.params.quiz_id, req.params.quiz_name, req.params.quiz_keyword]);
             return res.redirect('http://localhost:3000/quiz');
         } catch (err) {
             console.error(err);

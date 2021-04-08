@@ -22,7 +22,7 @@ function App() {
   return (
       <div className="App">
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-              <Link  className="navbar-brand" to="/">Cra'Quiz</Link>
+              <Link className="navbar-brand" to="/">Cra'Quiz</Link>
 
               <div className="collapse navbar-collapse" id="navbarNavDropdown">
                   <ul className="navbar-nav">
