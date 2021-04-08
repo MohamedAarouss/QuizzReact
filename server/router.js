@@ -4,6 +4,7 @@ const db = require('./data/pg');
 const axios = require('axios');
 const {redirectTo} = require("@reach/router");
 
+
 module.exports = router;
 
 router
@@ -60,7 +61,6 @@ router
         async (req, res) => {
             try {
                 const result = await db.query('select * from quiz');
-                // console.log(result.rows);
                 res.json(result.rows);
             } catch (err) {
                 console.error(err);
@@ -73,7 +73,6 @@ router
         async (req, res) => {
             try {
                 const result = await db.query('select * from quiz where quiz_id =$1', [req.params.id]);
-                console.log(result.rows);
                 res.json(result.rows);
             } catch (err) {
                 console.error(err);
@@ -86,7 +85,6 @@ router
         async (req, res) => {
             try {
                 const question = await db.query('select * from question where quiz_id =$1', [req.params.id]);
-                console.log(question.rows);
                 res.json(question.rows);
             } catch (err) {
                 console.error(err);
@@ -96,10 +94,52 @@ router
     .get('/quiz/:ques_id/propositions',
         async (req, res) => {
             const question = await db.query('select * from proposition where ques_id =$1', [req.params.ques_id]);
-            console.log(question.rows);
+            res.json(question.rows);
+        })
+    .get('/propositions/:quiz_id',
+        async (req, res) => {
+            const question = await db.query('select * from proposition,question,quiz WHERE proposition.ques_id = question.ques_id AND question.quiz_id = quiz.quiz_id AND quiz.quiz_id = $1', [req.params.quiz_id]);
             res.json(question.rows);
         })
 ;
+// Question
+router
+    // new question
+    .get('/new_question/:ques_phrase/:quiz_id', async (req, res) => {
+        try {
+            await db.query("insert into question(ques_phrase, quiz_id) values($1,$2)", [req.params.ques_phrase, req.params.quiz_id]);
+            // return res.redirect('http://localhost:3000/quiz');
+            console.log('ajout new ques');
+        } catch (err) {
+            console.error(err);
+            res.sendStatus(500);
+        }
+    })
+    // update question
+    .get("/edit_question/:ques_id/:ques_phrase", async (req, res) => {
+        try {
+            console.log('update question');
+            await db.query("UPDATE question SET ques_phrase = $2 WHERE ques_id = $1", [req.params.ques_id, req.params.ques_phrase]);
+            // return res.redirect('http://localhost:3000/quiz');
+        } catch (err) {
+            console.error(err);
+            res.sendStatus(500);
+        }
+    })
+    // delete question
+    .get('/delete_question/:ques_id',
+        async (req, res) => {
+            try {
+                await db.query('DELETE FROM proposition where proposition.ques_id = $1', [q.ques_id]);
+                await db.query('DELETE FROM question where question.ques_id = $1', [req.params.ques_id]);
+
+                return res.redirect('http://localhost:3000/quiz');
+            } catch (err) {
+                console.error(err);
+                res.sendStatus(500);
+            }
+        })
+
 
 router
     .use((req, res) => {

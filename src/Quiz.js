@@ -12,7 +12,6 @@ function Quiz() {
     useEffect(() => {
         const getQuiz = async () => {
             const data = (await axios.get('http://localhost:8000/quiz')).data;
-            console.log(data);
             setQuiz(data);
         }
         getQuiz()
@@ -43,7 +42,7 @@ function Quiz() {
                 {quiz.map(q =>
                     <tr>
                         <td>{q.quiz_id}</td>
-                        <td><Link className="btn btn-primary" to={`${q.quiz_id}`}>{q.quiz_name}</Link></td>
+                        <td>{q.quiz_name}</td>
                         <td>
                             <img class="image" src={q.quiz_image} alt="Pas d'image"/>
                         </td>
