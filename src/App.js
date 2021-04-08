@@ -10,6 +10,7 @@ import Quiz from "./Quiz";
 import QuizForm from "./Form/QuizForm";
 import QuizEditForm from "./Form/QuizEditForm";
 import Question from "./Questions";
+import Home from "./Home";
 
 
 function App() {
@@ -21,11 +22,11 @@ function App() {
   return (
       <div className="App">
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-              <a className="navbar-brand" href="http://localhost:3000/home">Quiz des crackheads</a>
+              <Link  className="navbar-brand" to="/">Cra'Quiz</Link>
 
               <div className="collapse navbar-collapse" id="navbarNavDropdown">
                   <ul className="navbar-nav">
-                      <Link className="btn btn-info" to="quiz">Liste des Quiz</Link>
+                      <Link className="btn btn-info" to="quiz">Administration</Link>
                       <div>
                           {(() => {
                               if (isLoggedIn) {
@@ -55,6 +56,7 @@ function App() {
               </div>
           </nav>
           <Router>
+              <Home path="/"/>
               <Login path="/login"/>
               <Register path="/register"/>
               <Quiz path="quiz"/>

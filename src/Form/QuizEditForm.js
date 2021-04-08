@@ -5,8 +5,8 @@ import async from "async";
 
 let tab_props = [];
 
-var compteur = 1;
 export default function Form(props) {
+var compteur = 1;
 
     const [quiz, setQuiz] = useState([]);
     useEffect(() => {

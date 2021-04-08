@@ -30,13 +30,9 @@ function Quiz() {
             <p>Loading</p>
         )
 
-    // function showQuestions(quiz_id){
-    //     window.location.href = 'http://localhost:3000/quiz/';
-    // }
-
     return (
         <>
-            <label>Recherche : </label>
+            <label>Recherche par thème : </label>
             <input id="search" value={search} onChange={handleSearch} type="text"/>
 
             <table className="table">
@@ -44,8 +40,8 @@ function Quiz() {
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nom du Quiz</th>
+                    <th scope="col">Thème</th>
                     <th scope="col">image</th>
-                    <th scope="col">Nombre de questions</th>
                     <th scope="col">Actions</th>
                 </tr>
                 </thead>
@@ -54,14 +50,13 @@ function Quiz() {
                     <tr>
                         <td>{q.quiz_id}</td>
                         <td>{q.quiz_name}</td>
+                        <td>{q.quiz_keyword}</td>
                         <td>
                             <img class="image" src={q.quiz_image} alt="Pas d'image"/>
                         </td>
-                        <td>10</td>
                         <td>
                             <Link className="btn btn-success" to={`${q.quiz_id}/questions`}>Jouer</Link>
                             <Link className="btn btn-warning" to={`/quiz/${q.quiz_id}/edit`}>Modifier</Link>
-                            <Link className="btn btn-danger" to={`/quiz/${q.quiz_id}/delete`}>Supprimer</Link>
                         </td>
                     </tr>
                 )}
