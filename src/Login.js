@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useCookies} from "react-cookie";
+import {navigate} from "@reach/router";
 
 export default function Login() {
     const [user, setUser] = useState({util_name: "", util_password: ""});
@@ -38,28 +39,7 @@ export default function Login() {
     // }
 
     if (cookies && cookies.td06) {
-        return (
-            <div className="container">
-                <div className="row">
-                    hello {cookies.td06.name} !!
-                </div>
-                <div className="row">
-                    <button className="btn btn-danger" onClick={() => removeCookie('td06')}>
-                        Déconnexion
-                    </button>
-                    {/*<button className="btn btn-success" onClick={getItems}>*/}
-                    {/*    objets*/}
-                    {/*</button>*/}
-                </div>
-                {/*<div className="row">*/}
-                {/*    <ul>*/}
-                {/*        {items.map( item =>*/}
-                {/*            <li key={item.id}>{item.name}</li>*/}
-                {/*        )}*/}
-                {/*    </ul>*/}
-                {/*</div>*/}
-            </div>
-        )
+        navigate('/quiz');
     }
 
     return(

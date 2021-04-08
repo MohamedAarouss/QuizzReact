@@ -1,6 +1,8 @@
 import './App.css';
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import {Card, ListGroup} from "react-bootstrap";
+import {navigate} from "@reach/router";
 
 let score = 0;
 
@@ -16,21 +18,42 @@ function Question(props) {
 
     return (
         <>
-            <div className="question">
-                Question : {props.question}
-                <br/>
-                Points : {props.points}
-            </div>
-            <div id="propositions" className="propositions">
-                {props.propositions.map(p =>
-                    <div>
-                        <input type="checkbox" id="proposition" name="proposition" value={p.prop_valide}/>
-                            <label htmlFor="subscribeNews">{p.prop_phrase}<img className="image" src={p.prop_image} alt=""/></label>
-
+            <Card className="container mt-3">
+                <Card.Header>
+                    <div className="question">
+                        <h2>Question : {props.question}</h2>
+                        <br/>
+                        <h4>Points : {props.points}</h4>
                     </div>
-                )}
-                <button onClick={(() => handleValidate())}>Valider</button>
-            </div>
+                </Card.Header>
+                <ListGroup variant="flush">
+                    <div id="propositions" className="propositions">
+                        <ListGroup.Item>
+                            {props.propositions.map(p =>
+                                <div>
+                                    <input type="checkbox" id="proposition" name="proposition" value={p.prop_valide}/>
+                                    <label className="" htmlFor="subscribeNews">{p.prop_phrase}
+                                        <div>
+                                            {(() => {
+                                                if (p.prop_image !== "") {
+                                                    return (
+                                                        <div>
+                                                            <img className="image ml-2" src={p.prop_image} alt=""/>
+                                                        </div>
+                                                    )
+                                                }
+                                            })()}
+                                        </div>
+                                    </label>
+                                </div>
+                            )}
+                        </ListGroup.Item>
+                    </div>
+                </ListGroup>
+                <Card.Footer>
+                    <button className="btn btn-success mb-1 row" onClick={(() => handleValidate())}>Valider</button>
+                </Card.Footer>
+            </Card>
         </>
     );
 }
@@ -119,7 +142,7 @@ function Questions(props) {
         }
         else{ q.innerHTML = "<h3 style='color: #ff0000'>Il n'y a plus de questions !</h3><br>" +
             "<h4>Votre score est de : </h4>"+score;
-        score=0
+        score=0;
         }
     }
 
@@ -127,7 +150,7 @@ function Questions(props) {
         <>
             <div id="questions" className="Questions">
                 {jsxQuestion}
-                <button onClick={(() => handleClick())}>Next</button>
+                <button className="btn btn-danger mt-2" onClick={(() => handleClick())}>Passer la question</button>
             </div>
         </>
     );

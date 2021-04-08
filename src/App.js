@@ -1,7 +1,6 @@
 import './App.css';
-import React, {useState} from "react";
+import React from "react";
 import {Link, Router} from "@reach/router";
-import axios from 'axios';
 import {useCookies} from 'react-cookie';
 import Login from "./Login";
 import Register from "./Register";
@@ -11,21 +10,21 @@ import QuizForm from "./Form/QuizForm";
 import QuizEditForm from "./Form/QuizEditForm";
 import Question from "./Questions";
 import Home from "./Home";
+import {Nav, Navbar, NavDropdown} from "react-bootstrap";
 
 
 function App() {
-  const [user, setUser] = useState({util_name: "", util_password: ""});
   const [cookies, setCookie, removeCookie] = useCookies(['td06']);
   if (cookies && cookies.td06)
       var isLoggedIn = true;
 
   return (
       <div className="App">
-          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-              <Link  className="navbar-brand" to="/">Cra'Quiz</Link>
-
-              <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                  <ul className="navbar-nav">
+          <Navbar bg="dark" expand="lg">
+              <Navbar.Brand className="text-light" href="/">Cra'Quiz</Navbar.Brand>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="mr-auto">
                       <Link className="btn btn-info" to="quiz">Administration</Link>
                       <div>
                           {(() => {
@@ -52,9 +51,9 @@ function App() {
                               }
                           })()}
                       </div>
-                  </ul>
-              </div>
-          </nav>
+                  </Nav>
+              </Navbar.Collapse>
+          </Navbar>
           <Router>
               <Home path="/"/>
               <Login path="/login"/>
