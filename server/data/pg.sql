@@ -47,6 +47,14 @@ create table proposition
 
 insert into proposition(prop_phrase,prop_image,prop_valide,ques_id) values('Momo','',true,1),('Cleveland','',true,1),('Leo','',true,1),('Lasagnes','',true,2),('Frites','',false,2),('Jeff Bezos','',false,3),('Momo','',true,3),('Jul','',false,3),('Steve Jobs','',true,3),('Momo','',false,4),('Cleveland','',false,4),('Leo','',false,4),('Asticot','',true,5),('Ver','',true,5),('Condota','',false,6),('OR','',false,6),('JM-Lagniez','',true,6),('','http://localhost:8000/img/25595.jpg',true,7),('','http://localhost:8000/img/ul6rv.jpg',false,7),('Oui','',true,8),('Non','',false,8);
 
+-- create table item
+-- (
+--     item_id serial primary key,
+--     item_name varchar
+-- );
+--
+-- insert into item (item_name) values('peinture'),('sculpture');
+
 select * from quiz;
 
 select * from question natural join quiz;
