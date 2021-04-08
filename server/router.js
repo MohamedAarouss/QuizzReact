@@ -1,11 +1,71 @@
 const express = require("express");
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const auth = require("./auth.js")();
+const cfg = require("./config.js");
+const pool = require('./data/pg');
+const saltRounds = 10;
 const router = express.Router();
+module.exports = router;
 const db = require('./data/pg');
 const axios = require('axios');
 const {redirectTo} = require("@reach/router");
 
 
 module.exports = router;
+
+router
+    .use(auth.initialize())
+
+router
+    .post("/signup", async (req, res) => {
+        try {
+            console.log("test ", req.body);
+            bcrypt.hash(req.body.util_password, saltRounds, async (err, hash) => {
+                console.log("blabla = ", hash);
+                const result = await db.query('insert into utilisateur(util_name,util_password) values ($1,$2) returning util_id', [req.body.util_name, hash]);
+                return res.sendStatus(201);
+            });
+        } catch (err) {
+            console.error("ERROR SIGNUP:", err);
+            res.sendStatus(401);
+        }
+    })
+
+router
+    .post("/token", async (req, res) => {
+        try {
+            console.log("test ", req.body);
+            const result = await db.query('select util_id, util_password from utilisateur where util_name=$1', [req.body.util_name]);
+            const match = await bcrypt.compare(req.body.util_password, result.rows[0].util_password);
+            if (match) {
+                const token = jwt.sign({id: result.rows[0].util_id,}, cfg.jwtSecret, {expiresIn: '1h'});
+                return res.json({token: token});
+            }
+            res.sendStatus(200);
+        } catch (err) {
+            console.error("ERROR TOKEN:", err);
+            res.sendStatus(401);
+        }
+    })
+
+// router
+//     .get('/items', async (req, res) => {
+//         try {
+//             const result = await db.query('select * from item');
+//             res.json(result.rows);
+//         } catch (err) {
+//             console.error(err);
+//             res.sendStatus(500);
+//         }
+//     })
+
+
+router
+    .get("/hello", auth.authenticate(), (req, res) => {
+        res.json("Hello world !!!!");
+    })
+
 
 router
     .get("/", (req, res) => {
