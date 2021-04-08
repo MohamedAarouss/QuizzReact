@@ -109,7 +109,6 @@ router
                 await db.query('DELETE FROM question where question.quiz_id = $1', [req.params.quiz_id]);
                 await db.query('DELETE FROM quiz WHERE quiz_id = $1', [req.params.quiz_id]);
 
-                return res.redirect('http://localhost:3000/quiz');
             } catch (err) {
                 console.error(err);
                 res.sendStatus(500);
@@ -190,7 +189,7 @@ router
     .get('/delete_question/:ques_id',
         async (req, res) => {
             try {
-                await db.query('DELETE FROM proposition where proposition.ques_id = $1', [q.ques_id]);
+                await db.query('DELETE FROM proposition where proposition.ques_id = $1', [req.params.ques_id]);
                 await db.query('DELETE FROM question where question.ques_id = $1', [req.params.ques_id]);
 
                 return res.redirect('http://localhost:3000/quiz');

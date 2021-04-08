@@ -97,24 +97,44 @@ var compteur = 1;
         console.log('generateHtmlQuestions');
 
         questions.forEach(q => {
+            // div question
             let div = document.createElement('div');
             div.className = 'question';
             div.id = 'question_' + q.ques_id;
+
+            // label
             let label = document.createElement('label');
             label.innerHTML = 'Question ' + compteur++;
+            div.appendChild(label);
+
+            // input question phrase
             let input = document.createElement('input');
             input.setAttribute("type", "text");
             input.className = 'input_ques';
             input.id = 'ques_' + q.ques_id;
             input.value = q.ques_phrase;
-            div.appendChild(label);
             div.appendChild(input);
+
+            // div des réponses
             let div_props = document.createElement('div');
             div_props.id = 'props_question_' + q.ques_id;
             div.appendChild(div_props);
-            document.getElementById('questions_wrapper').appendChild(div);
 
+            // button delete
+            let button = document.createElement('button');
+            button.className = "btn btn-danger";
+            button.onclick = e => deleteQuestion(e, q.ques_id);
+            button.innerHTML = "Supprimer";
+            div.appendChild(button);
+
+            document.getElementById('questions_wrapper').appendChild(div);
         })
+    }
+
+    function deleteQuestion(e, ques_id){
+        e.preventDefault();
+        axios.get('http://localhost:8000/delete_question/' +ques_id);
+        document.location.reload();
     }
 
     return (

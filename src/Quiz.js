@@ -25,7 +25,13 @@ function Quiz() {
         setQuiz(data);
     }
 
-    if(quiz.length === 0 )
+    async function deleteQuiz(e, quiz_id) {
+        e.preventDefault();
+        axios.get('http://localhost:8000/delete_quiz/' + quiz_id);
+        document.location.reload();
+    }
+
+    if (quiz.length === 0)
         return (
             <p>Loading</p>
         )
@@ -57,6 +63,8 @@ function Quiz() {
                         <td>
                             <Link className="btn btn-success" to={`${q.quiz_id}/questions`}>Jouer</Link>
                             <Link className="btn btn-warning" to={`/quiz/${q.quiz_id}/edit`}>Modifier</Link>
+                            <button className="btn btn-danger" onClick={e => deleteQuiz(e, q.quiz_id)}>Supprimer
+                            </button>
                         </td>
                     </tr>
                 )}
