@@ -5,6 +5,15 @@ import axios from "axios";
 let score = 0;
 
 function Question(props) {
+
+    function handleValidate(){
+        let checkBox = document.querySelector('input[type="checkbox"]');
+        if(checkBox.checked && checkBox.value){
+            checkBox.value=''
+            score+=props.points
+    }
+}
+
     return (
         <>
             <div className="question">
@@ -12,15 +21,15 @@ function Question(props) {
                 <br/>
                 Points : {props.points}
             </div>
-            <div className="propositions">
+            <div id="propositions" className="propositions">
                 {props.propositions.map(p =>
-                    <tr>
-                        <td>
-                            <input type="checkbox" id="proposition" name="proposition" value={p.prop_valide}/>
-                                <label htmlFor="subscribeNews">{p.prop_phrase}<img className="image" src={p.prop_image} alt=""/></label>
-                        </td>
-                    </tr>
+                    <div>
+                        <input type="checkbox" id="proposition" name="proposition" value={p.prop_valide}/>
+                            <label htmlFor="subscribeNews">{p.prop_phrase}<img className="image" src={p.prop_image} alt=""/></label>
+
+                    </div>
                 )}
+                <button onClick={(() => handleValidate())}>Valider</button>
             </div>
         </>
     );
@@ -108,15 +117,17 @@ function Questions(props) {
             setCurrIndex(currIndex + 1);
             getPropositions();
         }
-        else q.innerHTML = "<h3 style='color: #ff0000'>Il n'y a plus de questions !</h3><br>" +
+        else{ q.innerHTML = "<h3 style='color: #ff0000'>Il n'y a plus de questions !</h3><br>" +
             "<h4>Votre score est de : </h4>"+score;
+        score=0
+        }
     }
 
         return (
         <>
             <div id="questions" className="Questions">
                 {jsxQuestion}
-                <button onClick={(() => handleClick())}>OK</button>
+                <button onClick={(() => handleClick())}>Next</button>
             </div>
         </>
     );

@@ -18,7 +18,7 @@ create table quiz
     quiz_name varchar,
     quiz_image varchar,
     quiz_keyword varchar,
-    user_id int references utilisateur(util_id)
+    user_id int references utilisateur(util_id) on delete cascade
 
 );
 
@@ -29,7 +29,7 @@ create table question
     ques_id serial primary key,
     ques_phrase varchar,
     ques_points int check(ques_points > 0),
-    quiz_id int references quiz(quiz_id)
+    quiz_id int references quiz(quiz_id) on delete cascade
 
 );
 
@@ -41,7 +41,7 @@ create table proposition
     prop_phrase varchar,
     prop_image varchar,
     prop_valide boolean,
-    ques_id int references question(ques_id)
+    ques_id int references question(ques_id) on delete cascade
 
 );
 
