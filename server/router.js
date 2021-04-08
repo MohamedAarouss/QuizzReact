@@ -18,8 +18,9 @@ router
     .post("/signup", async (req, res) => {
         try {
             console.log("test ", req.body);
-            bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
-                const result = await db.query('insert into utilisateur(util_name,util_password) values ($1,$2) returning util_id', [req.body.name, hash]);
+            bcrypt.hash(req.body.util_password, saltRounds, async (err, hash) => {
+                console.log("blabla = ", hash);
+                const result = await db.query('insert into utilisateur(util_name,util_password) values ($1,$2) returning util_id', [req.body.util_name, hash]);
                 return res.sendStatus(201);
             });
         } catch (err) {
@@ -44,6 +45,18 @@ router
             res.sendStatus(401);
         }
     })
+
+// router
+//     .get('/items', async (req, res) => {
+//         try {
+//             const result = await db.query('select * from item');
+//             res.json(result.rows);
+//         } catch (err) {
+//             console.error(err);
+//             res.sendStatus(500);
+//         }
+//     })
+
 
 router
     .get("/hello", auth.authenticate(), (req, res) => {

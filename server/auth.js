@@ -13,7 +13,7 @@ module.exports = function () {
     const strategy = new Strategy(opts, async (payload, done) =>
     {
         try {
-            const result = await pool.query('select 1 from person where per_id=$1', [payload.id]);
+            const result = await pool.query('select 1 from utilisateur where util_id=$1', [payload.id]);
             if (result && result.rows && result.rows[0]) {
                 return done(null, {
                     id: payload.id
