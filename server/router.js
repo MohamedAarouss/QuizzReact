@@ -212,10 +212,8 @@ router
     // update proposition
     .get("/edit_proposition/:prop_id/:prop_phrase/:prop_valide", async (req, res) => {
         try {
-            console.log('AAAAAAAAAAAAAAAAAAAAAAa');
             await db.query("UPDATE proposition SET prop_phrase = $2, prop_valide = $3 WHERE prop_id = $1", [req.params.prop_id, req.params.prop_phrase, req.params.prop_valide]);
             // await db.query("UPDATE proposition SET prop_phrase = 'TEST' WHERE prop_id = $1", [req.params.prop_id]);
-            console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBB');
 
         } catch (err) {
             console.error(err);
