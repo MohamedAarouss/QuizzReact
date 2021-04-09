@@ -80,10 +80,14 @@ h1 {
 }
 input{
   width:300px;
-}
-input:hover{
-  transform: scale(1.05);
+  border:solid lightgray 1px;
 }
 .page{
   text-align: center;
+}
+.props_wrapper{
+  margin:20px;
+  background-color: floralwhite;
+  border-radius: 5px;
+  padding:10px;
 }

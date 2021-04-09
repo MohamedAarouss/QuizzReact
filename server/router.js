@@ -101,7 +101,7 @@ router
     .get('/delete_quiz/:quiz_id',
         async (req, res) => {
             try {
-                const questions = await db.query('select * from question where question.quiz_id =$1', [req.params.quiz_id]);
+                const questions = await db.query('select * from question where question.quiz_id =$1 ORDER BY ques_id ASC', [req.params.quiz_id]);
                 for (const q of questions.rows) {
                     await db.query('DELETE FROM proposition where proposition.ques_id = $1', [q.ques_id]);
                 }
@@ -118,7 +118,7 @@ router
     .get('/quiz',
         async (req, res) => {
             try {
-                const result = await db.query('select * from quiz');
+                const result = await db.query('select * from quiz ORDER BY quiz_id ASC');
                 res.json(result.rows);
             } catch (err) {
                 console.error(err);
@@ -130,7 +130,7 @@ router
     .get('/quiz/:id',
         async (req, res) => {
             try {
-                const result = await db.query('select * from quiz where quiz_id =$1', [req.params.id]);
+                const result = await db.query('select * from quiz where quiz_id =$1 ORDER BY quiz_id ASC', [req.params.id]);
                 res.json(result.rows);
             } catch (err) {
                 console.error(err);
@@ -142,7 +142,7 @@ router
     .get('/quiz/:id/questions',
         async (req, res) => {
             try {
-                const question = await db.query('select * from question where quiz_id =$1', [req.params.id]);
+                const question = await db.query('select * from question where quiz_id =$1 ORDER BY ques_id ASC', [req.params.id]);
                 res.json(question.rows);
             } catch (err) {
                 console.error(err);
@@ -151,12 +151,12 @@ router
         })
     .get('/quiz/:ques_id/propositions',
         async (req, res) => {
-            const question = await db.query('select * from proposition where ques_id =$1', [req.params.ques_id]);
+            const question = await db.query('select * from proposition where ques_id =$1 ORDER BY prop_id ASC', [req.params.ques_id]);
             res.json(question.rows);
         })
     .get('/propositions/:quiz_id',
         async (req, res) => {
-            const question = await db.query('select * from proposition,question,quiz WHERE proposition.ques_id = question.ques_id AND question.quiz_id = quiz.quiz_id AND quiz.quiz_id = $1', [req.params.quiz_id]);
+            const question = await db.query('select * from proposition,question,quiz WHERE proposition.ques_id = question.ques_id AND question.quiz_id = quiz.quiz_id AND quiz.quiz_id = $1 ORDER BY prop_id ASC', [req.params.quiz_id]);
             res.json(question.rows);
         })
 ;
@@ -198,6 +198,40 @@ router
             }
         })
 
+// ----------------------------- PROPOSITION -----------------------------
+router
+    // new proposition
+    .get('/new_proposition/:ques_id/:prop_phrase/:prop_valide', async (req, res) => {
+        try {
+            await db.query("insert into proposition(ques_id, prop_phrase, prop_valide) values($1,$2,$3)", [req.params.ques_id, req.params.prop_phrase, req.params.prop_valide]);
+        } catch (err) {
+            console.error(err);
+            res.sendStatus(500);
+        }
+    })
+    // update proposition
+    .get("/edit_proposition/:prop_id/:prop_phrase/:prop_valide", async (req, res) => {
+        try {
+            console.log('AAAAAAAAAAAAAAAAAAAAAAa');
+            await db.query("UPDATE proposition SET prop_phrase = $2, prop_valide = $3 WHERE prop_id = $1", [req.params.prop_id, req.params.prop_phrase, req.params.prop_valide]);
+            // await db.query("UPDATE proposition SET prop_phrase = 'TEST' WHERE prop_id = $1", [req.params.prop_id]);
+            console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBB');
+
+        } catch (err) {
+            console.error(err);
+            res.sendStatus(500);
+        }
+    })
+    // delete proposition
+    .get('/delete_proposition/:prop_id',
+        async (req, res) => {
+            try {
+                await db.query('DELETE FROM proposition where proposition.prop_id = $1', [req.params.prop_id]);
+            } catch (err) {
+                console.error(err);
+                res.sendStatus(500);
+            }
+        })
 
 router
     .use((req, res) => {
