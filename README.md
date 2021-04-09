@@ -12,7 +12,7 @@ L'équipe **LesCrackheadsDeLens** est composé de :
 
 ### L'application
 
-**Crac'Quiz** est un site de quiz en ligne, il permet de répondre à des quiz déjà présents sur le site créé par les autres utilisateurs
+**Cra'Quiz** est un site de quiz en ligne, il permet de répondre à des quiz déjà présents sur le site créé par les autres utilisateurs
 mais il permet aussi de créer son propre quiz en y ajoutant le nom du quiz, une image et un thème.
 Il ajoute également les questions avec le nombre de points que la question rapporte, ainsi que les propositions associées
 avec un texte ou une image.
