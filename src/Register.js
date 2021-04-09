@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, {useState} from "react";
 import {redirectTo} from "@reach/router";
+import {Button, Card, Form, ListGroup} from "react-bootstrap";
 
 export default function Register() {
     const [user, setUser] = useState({util_name: "", util_password: ""});
@@ -18,29 +19,43 @@ export default function Register() {
     }
 
     return(
-        <div className="register-wrapper">
-            <h1>Si vous n'êtes pas encore inscrit, vous pouvez le faire dès maintenant !</h1>
-            <form onSubmit={createAccount} method="post">
-                <div>
-                    Username
-                    <input
-                        type="text"
-                        value={user.util_name}
-                        onChange={e => setUser({...user, util_name: e.target.value})}
-                    />
-                </div>
-                <div>
-                    Password
-                    <input
-                        type="password"
-                        value={user.util_password}
-                        onChange={e => setUser({...user, util_password: e.target.value})}
-                    />
-                </div>
-                <div>
-                    <button type="submit">Valider</button>
-                </div>
-            </form>
+        <div className="register-wrapper container mt-2">
+            <Card>
+                <Card.Header><h1>Pour profiter du site, connectez-vous !</h1></Card.Header>
+                <Form onSubmit={createAccount}>
+                    <ListGroup variant="flush">
+
+                        <ListGroup.Item>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Label>Nom d'utilisateur</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    value={user.util_name}
+                                    onChange={e => setUser({...user, util_name: e.target.value})}
+                                />
+                            </Form.Group>
+                        </ListGroup.Item>
+
+                        <ListGroup.Item>
+                            <Form.Group controlId="formBasicPassword">
+                                <Form.Label>Mot de passe</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    value={user.util_password}
+                                    onChange={e => setUser({...user, util_password: e.target.value})}
+                                />
+                            </Form.Group>
+                        </ListGroup.Item>
+
+                        <ListGroup.Item>
+                            <Button variant="primary" type="submit">
+                                Se connecter
+                            </Button>
+                        </ListGroup.Item>
+
+                    </ListGroup>
+                </Form>
+            </Card>
         </div>
     )
 }

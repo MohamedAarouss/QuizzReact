@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useCookies} from "react-cookie";
 import {navigate} from "@reach/router";
+import {Button, Card, Form, ListGroup} from "react-bootstrap";
 
 export default function Login() {
     const [user, setUser] = useState({util_name: "", util_password: ""});
@@ -43,29 +44,65 @@ export default function Login() {
     }
 
     return(
-        <div className="login-wrapper">
-            <h1>Pour profiter du site, connectez-vous !</h1>
-            <form onSubmit={signIn} method="post">
-                <div>
-                    Username
-                    <input
-                        type="text"
-                        value={user.util_name}
-                        onChange={e => setUser({...user, util_name: e.target.value})}
-                    />
-                </div>
-                <div>
-                    Password
-                    <input
-                        type="password"
-                        value={user.util_password}
-                        onChange={e => setUser({...user, util_password: e.target.value})}
-                    />
-                </div>
-                <div>
-                    <button type="submit">Valider</button>
-                </div>
-            </form>
+        <div className="login-wrapper container mt-2">
+            <Card>
+                <Card.Header><h1>Pour profiter du site, connectez-vous !</h1></Card.Header>
+                <Form onSubmit={signIn}>
+                    <ListGroup variant="flush">
+
+                        <ListGroup.Item>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Label>Nom d'utilisateur</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    value={user.util_name}
+                                    onChange={e => setUser({...user, util_name: e.target.value})}
+                                />
+                            </Form.Group>
+                        </ListGroup.Item>
+
+                        <ListGroup.Item>
+                            <Form.Group controlId="formBasicPassword">
+                                <Form.Label>Mot de passe</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    value={user.util_password}
+                                    onChange={e => setUser({...user, util_password: e.target.value})}
+                                />
+                            </Form.Group>
+                        </ListGroup.Item>
+
+                        <ListGroup.Item>
+                            <Button variant="primary" type="submit">
+                                Se connecter
+                            </Button>
+                        </ListGroup.Item>
+
+                    </ListGroup>
+                </Form>
+            </Card>
+
+            {/*<form onSubmit={signIn} method="post">*/}
+            {/*    <div>*/}
+            {/*        Username*/}
+            {/*        <input*/}
+            {/*            type="text"*/}
+            {/*            value={user.util_name}*/}
+            {/*            onChange={e => setUser({...user, util_name: e.target.value})}*/}
+            {/*        />*/}
+            {/*    </div>*/}
+            {/*    <div>*/}
+            {/*        Password*/}
+            {/*        <input*/}
+            {/*            type="password"*/}
+            {/*            value={user.util_password}*/}
+            {/*            onChange={e => setUser({...user, util_password: e.target.value})}*/}
+            {/*        />*/}
+            {/*    </div>*/}
+            {/*    <div>*/}
+            {/*        <button type="submit">Valider</button>*/}
+            {/*    </div>*/}
+            {/*</form>*/}
         </div>
     )
 }
