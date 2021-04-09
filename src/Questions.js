@@ -24,8 +24,8 @@ function Question(props) {
             <div id="propositions" className="propositions">
                 {props.propositions.map(p =>
                     <div>
-                        <input type="checkbox" id="proposition" name="proposition" value={p.prop_valide}/>
-                            <label htmlFor="subscribeNews">{p.prop_phrase}<img className="image" src={p.prop_image} alt=""/></label>
+                        <input type="checkbox" id={p.prop_id} name="proposition" value={p.prop_valide}/>
+                        <label htmlFor="subscribeNews">{p.prop_phrase}<img className="image" src={p.prop_image} alt=""/></label>
 
                     </div>
                 )}
@@ -40,7 +40,6 @@ function Questions(props) {
     const [questions, setQuestions] = useState([]);
     const [propositions, setPropositions] = useState([]);
     const [currIndex, setCurrIndex] = useState(0);
-    const [initial, setInitial] = useState(true);
 
     useEffect(() => {
         const getQuestions = async () => {
@@ -65,11 +64,11 @@ function Questions(props) {
 
     async function getPropositions() {
         let p = [];
-        console.log('getPropositions')
+        //console.log('getPropositions')
         const ques_id = currentQuestion.ques_id;
         //console.log(ques_id)
         //try{ // execute 2 fois ?
-            console.log('avant')
+            //console.log('avant')
         // if(!initial){
             await axios.get('http://localhost:8000/quiz/'+ques_id+'/propositions')
             .then(response => {
@@ -80,9 +79,9 @@ function Questions(props) {
             .catch(error => {
                 console.log(error.response)
             })
-            console.log(p);
+            //console.log(p);
             // setPropositions(p);
-            console.log('apres')
+            //console.log('apres')
         // }else{
         //     await axios.get('http://localhost:8000/quiz/1/propositions')
         //         .then(response => {
@@ -127,7 +126,7 @@ function Questions(props) {
         <>
             <div id="questions" className="Questions">
                 {jsxQuestion}
-                <button onClick={(() => handleClick())}>Next</button>
+                <button onClick={(() => handleClick())}>Suivant</button>
             </div>
         </>
     );
