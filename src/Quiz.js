@@ -15,7 +15,7 @@ function Quiz() {
     }
 
     useEffect(() => {
-        const research = quiz.filter(q => String(q.quiz_keyword) === String(search));
+        const research = quiz.filter(q => String(q.quiz_keyword) === String(search) || String(q.quiz_name) === String(search));
         research.length === 0 ? getQuiz() : setQuiz(research);
     }, [search]);
 
@@ -25,27 +25,40 @@ function Quiz() {
         setQuiz(data);
     }
 
-    if(quiz.length === 0 )
+    async function deleteQuiz(e, quiz_id) {
+        e.preventDefault();
+        var answer = window.confirm("Voulez-vous vraiment supprimer le quiz ?");
+        if (answer === true) {
+            axios.get('http://localhost:8000/delete_quiz/' + quiz_id);
+            window.location.href = "http://localhost:3000/quiz";
+        }
+
+    }
+
+    if (quiz.length === 0)
         return (
-            <p>Loading</p>
+            <p>Pas de quiz, ou vous n'avez pas les droits d'accès.</p>
         )
 
     return (
         <>
-            <label>Recherche par thème : </label>
-            <input id="search" value={search} onChange={handleSearch} type="text"/>
+            <div class="page">
+                <div className="research_wrapper">
+                    <label>Recherche (Nom ou Thème) : </label>
+                    <input id="search" value={search} onChange={handleSearch} type="text"/>
+                </div>
 
-            <table className="table">
-                <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nom du Quiz</th>
-                    <th scope="col">Thème</th>
-                    <th scope="col">image</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
+                <table className="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nom du Quiz</th>
+                        <th scope="col">Thème</th>
+                        <th scope="col">image</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                 {quiz.map(q =>
                     <tr>
                         <td>{q.quiz_id}</td>
@@ -57,13 +70,18 @@ function Quiz() {
                         <td>
                             <Link className="btn btn-success" to={`${q.quiz_id}/questions`}>Jouer</Link>
                             <Link className="btn btn-warning" to={`/quiz/${q.quiz_id}/edit`}>Modifier</Link>
+                            <button className="btn btn-danger" onClick={e => deleteQuiz(e, q.quiz_id)}>Supprimer
+                            </button>
                         </td>
                     </tr>
                 )}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
 
-            <Link className="btn btn-success" to="/quiz/new">Créer un quiz</Link>
+                <Link className="btn btn-success" to="/quiz/new">Créer un quiz</Link>
+
+            </div>
+
 
         </>
     );

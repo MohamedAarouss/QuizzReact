@@ -31,7 +31,7 @@ function Question(props) {
                         <ListGroup.Item>
                             {props.propositions.map(p =>
                                 <div>
-                                    <input type="checkbox" id="proposition" name="proposition" value={p.prop_valide}/>
+                                    <input type="checkbox" id={p.prop_id} name="proposition" value={p.prop_valide}/>
                                     <label className="" htmlFor="subscribeNews">{p.prop_phrase}
                                         <div>
                                             {(() => {
@@ -63,7 +63,6 @@ function Questions(props) {
     const [questions, setQuestions] = useState([]);
     const [propositions, setPropositions] = useState([]);
     const [currIndex, setCurrIndex] = useState(0);
-    const [initial, setInitial] = useState(true);
 
     useEffect(() => {
         const getQuestions = async () => {
@@ -88,11 +87,11 @@ function Questions(props) {
 
     async function getPropositions() {
         let p = [];
-        console.log('getPropositions')
+        //console.log('getPropositions')
         const ques_id = currentQuestion.ques_id;
         //console.log(ques_id)
         //try{ // execute 2 fois ?
-            console.log('avant')
+            //console.log('avant')
         // if(!initial){
             await axios.get('http://localhost:8000/quiz/'+ques_id+'/propositions')
             .then(response => {
@@ -103,9 +102,9 @@ function Questions(props) {
             .catch(error => {
                 console.log(error.response)
             })
-            console.log(p);
+            //console.log(p);
             // setPropositions(p);
-            console.log('apres')
+            //console.log('apres')
         // }else{
         //     await axios.get('http://localhost:8000/quiz/1/propositions')
         //         .then(response => {

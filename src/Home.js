@@ -24,12 +24,14 @@ function Home() {
 
     return (
         <>
+            <div class="page">
             <h1>Bienvenue sur Cra'Quiz !</h1>
-            <label>Recherche par thème : </label>
-            <input id="search" value={search} onChange={handleSearch} type="text"/>
-
+            <div class="research_wrapper">
+                <label>Recherche (Nom ou Thème) : </label>
+                <input id="search" value={search} onChange={handleSearch} type="text"/>
+            </div>
             {quiz.map(q =>
-                <div class="quiz_wrapper">
+                <div class="quiz_presentation">
                     <h1><b>{q.quiz_name}</b></h1>
                     <span>Thème : "{q.quiz_keyword}"</span>
                     <img class="image2" src={q.quiz_image} alt="Pas d'image"/>
@@ -37,6 +39,7 @@ function Home() {
                     <Link className="btn btn-success play" to={`/quiz/${q.quiz_id}/questions`}>Jouer</Link>
                 </div>
             )}
+            </div>
         </>
     );
 }
