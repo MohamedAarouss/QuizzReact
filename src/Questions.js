@@ -9,7 +9,7 @@ let score = 0;
 function Question(props) {
 
     function handleValidate(){
-        let checkBox = document.querySelector('input[type="checkbox"]');
+        let checkBox = document.querySelector('input[value="true"]');
         if(checkBox.checked && checkBox.value){
             checkBox.value=''
             score+=props.points
@@ -98,7 +98,7 @@ function Questions(props) {
                 p=response.data;
                 setPropositions(p);
                 //setCurrIndex(currIndex+1)
-                console.log('result')})
+                console.log(p)})
             .catch(error => {
                 console.log(error.response)
             })
@@ -143,7 +143,6 @@ function Questions(props) {
             "<h3 style='color: #ff0000'>Il n'y a plus de questions !</h3><br>" +
             "<h4>Votre score est de : </h4>"+score
             +"</div>";
-            score=0;
         }
     }
 
