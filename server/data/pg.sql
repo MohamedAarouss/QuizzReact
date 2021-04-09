@@ -40,8 +40,8 @@ insert into question(ques_phrase,ques_points,quiz_id) values('Qui est le père d
                                                              ('De quelle planète est originaire Anakin Skywalker ?',4,1),
                                                              ('Comment est morte la mère d Anakin Skywalker ?',1,1),
                                                              ('La peur mène à la colère, la colère mène à la haine, la haine mène à ... ?',1,1),
-                                                             ('Comment est morte la reine Padmé Amidala ?',1,1),
-                                                             ('Qui fût le maitre d Obi-Wan Kenobi ?',1,1);
+                                                             ('Comment est morte la reine Padmé Amidala ?',1,1);
+
 
 create table proposition
 (

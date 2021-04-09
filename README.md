@@ -13,7 +13,7 @@ L'équipe **LesCrackheadsDeLens** est composé de :
 ### L'application
 
 **Crac'Quiz** est un site de quiz en ligne, il permet de répondre à des quiz déjà présents sur le site créé par les autres utilisateurs
-mais il peut aussi créer son propre quiz en y ajoutant le nom du quiz, une image et un mot-clé.
+mais il permet aussi créer son propre quiz en y ajoutant le nom du quiz, une image et un thème.
 Il ajoute également les questions avec le nombre de points que la question rapporte, ainsi que les propositions associées
 avec un texte ou une image.
 
@@ -21,11 +21,6 @@ avec un texte ou une image.
 
 Pour l'IDE nous avons tous utilisé _WebStorm_ ainsi qu'un répertoire _GitLab_ associé.
 Pour la base de donnée nous utilisons chacun _PostgreSQL_ et les technologies utilisées nous avons du _Express.js_ pour le backend et du _React.js_ pour le frontend.
-
-Voici une liste des packages npm que nous avons utilisés :
-
-- npm i @reach/router
-- npm install axios
 
 ## Gestion de projet
 
@@ -35,7 +30,7 @@ De plus nous avons déjà réalisé des projets à l'aide de cette méthode et n
 Concernant les rôles, nous allons le voir dans la répartition des fonctionnalités mais voici un petit résumé :
 
 - Mohamed s'est occupé de la partie authentification et des fonctionnalités liées à ça.
-- Cleveland a réalisé des formulaires (création, modification, suppression) pour les quiz, questions et propositions.
+- Cleveland a réalisé des formulaires ainsi que le backend (création, modification, suppression) pour les quiz, questions et propositions.
 - Léo s'est chargé du backend et de l'affichage des quiz et de la réalisation des tests.
 
 De plus, Mohamed et Cleveland se sont occupés de l'esthétique du site avec bootstrap.

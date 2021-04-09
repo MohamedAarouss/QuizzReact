@@ -16,7 +16,7 @@ describe("My Quiz Test", () => {
         cy.visit('http://localhost:3000/quiz/1/questions')
         cy.get("#1").click()
         cy.contains("Valider").click()
-        cy.contains("Suivant").click()
+        cy.contains("Passer la question").click()
     });
     it('should check question and answer changing', function () {
         cy.visit('http://localhost:3000/quiz/1/questions')
@@ -24,7 +24,7 @@ describe("My Quiz Test", () => {
             // do more work here
 
             // click the button which changes the div's text
-            cy.contains("Suivant").click()
+            cy.contains("Passer la question").click()
 
             // grab the div again and compare its previous text
             // to the current text
@@ -38,7 +38,7 @@ describe("My Quiz Test", () => {
             // do more work here
 
             // click the button which changes the div's text
-            cy.contains("Suivant").click()
+            cy.contains("Passer la question").click()
 
             // grab the div again and compare its previous text
             // to the current text
@@ -49,7 +49,7 @@ describe("My Quiz Test", () => {
         cy.get("#5").click()
         cy.get("#4").click()
         cy.contains("Valider").click()
-        cy.contains("Suivant").click()
+        cy.contains("Passer la question").click()
         cy.contains("Il n'y a plus de questions !")
         cy.contains("5")
     });
