@@ -21,7 +21,7 @@ export default function Register() {
     return(
         <div className="register-wrapper container mt-2">
             <Card>
-                <Card.Header><h1>Pour profiter du site, connectez-vous !</h1></Card.Header>
+                <Card.Header><h1>Inscrivez-vous dès maintenant !</h1></Card.Header>
                 <Form onSubmit={createAccount}>
                     <ListGroup variant="flush">
 

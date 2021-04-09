@@ -20,7 +20,7 @@ function Question(props) {
         <>
             <Card className="container mt-3">
                 <Card.Header>
-                    <div className="question">
+                    <div className="question text-center">
                         <h2>Question : {props.question}</h2>
                         <br/>
                         <h4>Points : {props.points}</h4>
@@ -139,9 +139,11 @@ function Questions(props) {
             setCurrIndex(currIndex + 1);
             getPropositions();
         }
-        else{ q.innerHTML = "<h3 style='color: #ff0000'>Il n'y a plus de questions !</h3><br>" +
-            "<h4>Votre score est de : </h4>"+score;
-        score=0;
+        else{ q.innerHTML = "<div style='text-align: center'>" +
+            "<h3 style='color: #ff0000'>Il n'y a plus de questions !</h3><br>" +
+            "<h4>Votre score est de : </h4>"+score
+            +"</div>";
+            score=0;
         }
     }
 
@@ -149,7 +151,7 @@ function Questions(props) {
         <>
             <div id="questions" className="Questions">
                 {jsxQuestion}
-                <button className="btn btn-danger mt-2" onClick={(() => handleClick())}>Passer la question</button>
+                <button className="btn btn-danger mt-2 mx-5" onClick={(() => handleClick())}>Passer la question</button>
             </div>
         </>
     );
