@@ -4,7 +4,7 @@
 
 ### L'équipe
 
-L'équipe **LesCrackheadsDeLens** est composé de :
+L'équipe est composée de :
 
 - Mohamed Aarouss
 - Cleveland Hennechart
